@@ -6,7 +6,7 @@
 /*   By: Kwillum <daniilxod@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 00:00:36 by kwillum           #+#    #+#             */
-/*   Updated: 2021/01/16 01:03:01 by Kwillum          ###   ########.fr       */
+/*   Updated: 2021/01/16 15:24:23 by Kwillum          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,7 @@ void	test_bureaucreat(std::string name, int grade)
 		std::cout << "Creation attempt\n";
 		create_bureaucreat(b, name, grade);
 	}
-	catch(Bureaucrat::GradeTooHighException const & e)
-	{
-		std::cerr << e.what() << '\n';
-		return ;
-	}
-	catch(Bureaucrat::GradeTooLowException const & e)
+	catch(std::exception const & e)
 	{
 		std::cerr << e.what() << '\n';
 		return ;
@@ -51,11 +46,7 @@ void	test_bureaucreat(std::string name, int grade)
 			b->incrementGrade();
 		}
 	}
-	catch(Bureaucrat::GradeTooHighException const & e)
-	{
-		std::cerr << e.what() << '\n';
-	}
-	catch(Bureaucrat::GradeTooLowException const & e)
+	catch(std::exception const & e)
 	{
 		std::cerr << e.what() << '\n';
 	}
@@ -68,11 +59,7 @@ void	test_bureaucreat(std::string name, int grade)
 			b->decrementGrade();
 		}
 	}
-	catch(Bureaucrat::GradeTooHighException const & e)
-	{
-		std::cerr << e.what() << '\n';
-	}
-	catch(Bureaucrat::GradeTooLowException const & e)
+	catch(std::exception const & e)
 	{
 		std::cerr << e.what() << '\n';
 	}
