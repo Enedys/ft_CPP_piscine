@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   MaterialSource.cpp                                 :+:      :+:    :+:   */
+/*   MateriaSource.cpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Kwillum <daniilxod@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,48 +10,74 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "MaterialSource.hpp"
+#include "MateriaSource.hpp"
 
-MaterialSource::MaterialSource() : _alreadyLearned(0)
+MateriaSource::MateriaSource() : _alreadyLearned(0)
 {
+	for (int i = 0; i < _memoryVolume; i++)
+		_materiaSrcs[i] = NULL;
 }
 
-MaterialSource::~MaterialSource()
+MateriaSource::~MateriaSource()
 {
 	for (int i = 0; i < _memoryVolume; i++)
 		if (_materiaSrcs[i])
 			delete _materiaSrcs[i];
 }
 
-MaterialSource::MaterialSource(const MaterialSource &toCopy) : _alreadyLearned(0)
+MateriaSource::MateriaSource(const MateriaSource &toCopy) : _alreadyLearned(0)
 {
 	for (int i = 0; i < _memoryVolume; i++)
-		_materiaSrcs[i] = toCopy._materiaSrcs[i]->clone();
+		_materiaSrcs[i] = NULL;
+	for (int i = 0; i < _memoryVolume; i++)
+	{
+		if (toCopy._materiaSrcs[i])
+		{
+			_materiaSrcs[i] = toCopy._materiaSrcs[i]->clone();
+			_alreadyLearned++;
+		}
+	}
 }
 
-MaterialSource	&MaterialSource::operator=(const MaterialSource &toCopy)
+MateriaSource	&MateriaSource::operator=(const MateriaSource &toCopy)
 {
 	for (int i = 0; i < _memoryVolume; i++)
 		if (_materiaSrcs[i])
 			delete _materiaSrcs[i];
 	_alreadyLearned = 0;
 	for (int i = 0; i < _memoryVolume; i++)
-		_materiaSrcs[i] = toCopy._materiaSrcs[i]->clone();
+	{
+		if (toCopy._materiaSrcs[i])
+			_materiaSrcs[i] = toCopy._materiaSrcs[i]->clone();
+		if (_materiaSrcs[i])
+			_alreadyLearned++;
+	}
 	return (*this);
 }
 
-void		MaterialSource::learnMateria(AMateria *m)
+void		MateriaSource::learnMateria(AMateria *m)
 {
 	if (_alreadyLearned < _memoryVolume && m)
+	{
 		for (int i = 0; i < _memoryVolume; i++)
+		{
 			if (!_materiaSrcs[i])
-				_materiaSrcs[_alreadyLearned] = m;
+			{
+				_materiaSrcs[i] = m;
+				_alreadyLearned++;
+				break;
+			}
+		}
+	}
 }
 
-AMateria*	MaterialSource::createMateria(std::string const & type)
+AMateria*	MateriaSource::createMateria(std::string const & type)
 {
 	for (int i = 0; i < _memoryVolume; i++)
-		if (_materiaSrcs[i]->getType() == type)
-			return (_materiaSrcs[i]->clone());
+	{
+		if (_materiaSrcs[i])
+			if (_materiaSrcs[i]->getType() == type)
+				return (_materiaSrcs[i]->clone());
+	}
 	return (NULL);
 }

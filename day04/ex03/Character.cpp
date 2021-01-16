@@ -6,7 +6,7 @@
 /*   By: Kwillum <daniilxod@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 18:58:58 by kwillum           #+#    #+#             */
-/*   Updated: 2021/01/12 20:50:32 by Kwillum          ###   ########.fr       */
+/*   Updated: 2021/01/13 00:43:26 by Kwillum          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,14 @@
 
 Character::Character() : _name("Default_name"), _alreadyEquiped(0)
 {
+	for (int i = 0; i < _inventoryVolume; i++)
+		_materiaInventory[i] = NULL;
 }
 
 Character::Character(const std::string &name) : _name(name), _alreadyEquiped(0)
 {
+	for (int i = 0; i < _inventoryVolume; i++)
+		_materiaInventory[i] = NULL;
 }
 
 Character::~Character()
@@ -30,6 +34,8 @@ Character::~Character()
 Character::Character(const Character &toCopy) : _name(toCopy._name)
 {
 	_alreadyEquiped = 0;
+	for (int j = 0; j < _inventoryVolume; j++)
+		_materiaInventory[j] = NULL;
 	for (int i = 0; i < _inventoryVolume; i++)
 	{
 		if (toCopy._materiaInventory[i])
@@ -49,6 +55,7 @@ void		Character::equip(AMateria* m)
 			{
 				_materiaInventory[i] = m;
 				_alreadyEquiped++;
+				break;
 			}
 		}
 	}
@@ -57,7 +64,10 @@ void		Character::equip(AMateria* m)
 void		Character::unequip(int idx)
 {
 	if (idx < _inventoryVolume && idx >= 0)
+	{
 		_materiaInventory[idx] = NULL;
+		_alreadyEquiped--;
+	}
 }
 
 void		Character::use(int idx, ICharacter& target)

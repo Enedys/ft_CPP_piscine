@@ -6,7 +6,7 @@
 /*   By: Kwillum <daniilxod@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 18:58:58 by kwillum           #+#    #+#             */
-/*   Updated: 2021/01/12 20:28:33 by Kwillum          ###   ########.fr       */
+/*   Updated: 2021/01/13 00:25:31 by Kwillum          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ class Character : public ICharacter
 		std::string			_name;
 		static const int	_inventoryVolume = 4;
 		int					_alreadyEquiped;
-		AMateria	*_materiaInventory[_inventoryVolume] = {};
+		AMateria	*_materiaInventory[_inventoryVolume];
 	public:
 		Character(const Character &toCopy);
 		Character(const std::string &_name);

@@ -1,34 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   MaterialSource.hpp                                 :+:      :+:    :+:   */
+/*   MateriaSource.hpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Kwillum <daniilxod@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 18:58:58 by kwillum           #+#    #+#             */
-/*   Updated: 2021/01/12 21:12:35 by Kwillum          ###   ########.fr       */
+/*   Updated: 2021/01/13 00:25:41 by Kwillum          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MATERIALSOURCE_HPP
-# define MATERIALSOURCE_HPP
+#ifndef MATERIASOURCE_HPP
+# define MATERIASOURCE_HPP
 # include <iostream>
 # include "AMateria.hpp"
-# include "IMaterialSource.hpp"
+# include "IMateriaSource.hpp"
 
-class MaterialSource : public IMateriaSource
+class MateriaSource : public IMateriaSource
 {
 private:
-	MaterialSource();
 	static const int	_memoryVolume = 4;
 	int					_alreadyLearned;
-	AMateria			*_materiaSrcs[_memoryVolume] = {};
-	MaterialSource(const MaterialSource &toCopy);
+	AMateria			*_materiaSrcs[_memoryVolume];
 public:
+	MateriaSource();
+	MateriaSource(const MateriaSource &toCopy);
 	void		learnMateria(AMateria *m);
 	AMateria*	createMateria(std::string const & type);
-	MaterialSource &operator=(const MaterialSource &toCopy);
-	virtual ~MaterialSource();
+	MateriaSource &operator=(const MateriaSource &toCopy);
+	virtual ~MateriaSource();
 };
 
 #endif
