@@ -6,7 +6,7 @@
 /*   By: Kwillum <daniilxod@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 01:13:00 by kwillum           #+#    #+#             */
-/*   Updated: 2021/01/16 22:51:46 by Kwillum          ###   ########.fr       */
+/*   Updated: 2021/01/17 03:39:39 by Kwillum          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,11 @@ std::ostream	&operator<<(std::ostream &o, const Form &f)
 const char	*Form::GradeTooHighException::what() const throw()
 {
 	return ("Form::Exception Too HIGH grade!");
+}
+
+const char	*Form::FormBadAllocException::what() const throw()
+{
+	return ("Form::Exception Bad allocation with new Form!");
 }
 
 const char	*Form::GradeTooLowException::what() const throw()

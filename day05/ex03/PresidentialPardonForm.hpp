@@ -1,35 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   RobotomyRequestForm.hpp                            :+:      :+:    :+:   */
+/*   PresidentialPardonForm.hpp                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Kwillum <daniilxod@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 16:28:58 by kwillum           #+#    #+#             */
-/*   Updated: 2021/01/16 21:31:21 by Kwillum          ###   ########.fr       */
+/*   Updated: 2021/01/18 00:19:02 by Kwillum          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ROBOTOMYREQUESTFORM_HPP
-# define ROBOTOMYREQUESTFORM_HPP
+#ifndef PRESIDENTIALPARDONFORM_HPP
+# define PRESIDENTIALPARDONFORM_HPP
 # include <iostream>
 # include <string>
 # include "Form.hpp"
-# include <ctime>
 
-class RobotomyRequestForm : public Form
+class PresidentialPardonForm : public Form
 {
 private:
 	const std::string			_target;
 	static const std::string	_name;
-	RobotomyRequestForm	&operator=(const RobotomyRequestForm &toCopy);
-	RobotomyRequestForm();
+	PresidentialPardonForm	&operator=(const PresidentialPardonForm &toCopy);
+	PresidentialPardonForm();
 public:
-	RobotomyRequestForm(const RobotomyRequestForm &toCopy);
-	RobotomyRequestForm(const std::string &target);
-	void					execute(const Bureaucrat &b) const;
-	const std::string		&getTartget() const;
-	virtual ~RobotomyRequestForm();
+	PresidentialPardonForm(const PresidentialPardonForm &toCopy);
+	PresidentialPardonForm(const std::string &target);
+	void				execute(const Bureaucrat &b) const;
+	static Form			*formCreator(std::string const &target);
+	const std::string	&getTartget() const;
+	virtual ~PresidentialPardonForm();
 };
 
 #endif

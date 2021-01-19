@@ -6,7 +6,7 @@
 /*   By: Kwillum <daniilxod@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 16:28:58 by kwillum           #+#    #+#             */
-/*   Updated: 2021/01/16 21:31:21 by Kwillum          ###   ########.fr       */
+/*   Updated: 2021/01/18 00:18:27 by Kwillum          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@ private:
 public:
 	RobotomyRequestForm(const RobotomyRequestForm &toCopy);
 	RobotomyRequestForm(const std::string &target);
-	void					execute(const Bureaucrat &b) const;
-	const std::string		&getTartget() const;
+	void				execute(const Bureaucrat &b) const;
+	const std::string	&getTartget() const;
+	static Form			*formCreator(std::string const &target);
 	virtual ~RobotomyRequestForm();
 };
 

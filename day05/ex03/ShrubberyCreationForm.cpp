@@ -6,7 +6,7 @@
 /*   By: Kwillum <daniilxod@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 16:28:58 by kwillum           #+#    #+#             */
-/*   Updated: 2021/01/16 23:03:40 by Kwillum          ###   ########.fr       */
+/*   Updated: 2021/01/17 04:04:11 by Kwillum          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,18 @@ const char *ShrubberyCreationForm::ShrubberyFormFileOpenException::what() const 
 const char *ShrubberyCreationForm::ShrubberyFormWriteErrorException::what() const throw()
 {
 	return ("ShrubberyCreationForm::Exception error writing in file!");
+}
+
+Form				*ShrubberyCreationForm::formCreator(std::string const &target)
+{
+	Form	*newForm = NULL;
+	try
+	{
+		newForm = new ShrubberyCreationForm(target);
+	}
+	catch(const std::bad_alloc& e)
+	{
+		throw Form::FormBadAllocException();
+	}
+	return (newForm);
 }

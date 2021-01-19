@@ -6,7 +6,7 @@
 /*   By: Kwillum <daniilxod@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 16:28:58 by kwillum           #+#    #+#             */
-/*   Updated: 2021/01/16 22:08:28 by Kwillum          ###   ########.fr       */
+/*   Updated: 2021/01/18 00:16:45 by Kwillum          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,9 @@ private:
 public:
 	ShrubberyCreationForm(const ShrubberyCreationForm &toCopy);
 	ShrubberyCreationForm(const std::string &target);
-	void					execute(const Bureaucrat &b) const;
-	const std::string		&getTartget() const;
+	static Form			*formCreator(std::string const &target);
+	void				execute(const Bureaucrat &b) const;
+	const std::string	&getTartget() const;
 	virtual ~ShrubberyCreationForm();
 };
 

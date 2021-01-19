@@ -6,7 +6,7 @@
 /*   By: Kwillum <daniilxod@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 16:28:58 by kwillum           #+#    #+#             */
-/*   Updated: 2021/01/16 21:50:22 by Kwillum          ###   ########.fr       */
+/*   Updated: 2021/01/17 04:04:06 by Kwillum          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,18 @@ RobotomyRequestForm	&RobotomyRequestForm::operator=(const RobotomyRequestForm &t
 {
 	(void)toCopy;
 	return (*this);
+}
+
+Form				*RobotomyRequestForm::formCreator(std::string const &target)
+{
+	Form	*newForm = NULL;
+	try
+	{
+		newForm = new RobotomyRequestForm(target);
+	}
+	catch(const std::bad_alloc& e)
+	{
+		throw Form::FormBadAllocException();
+	}
+	return (newForm);
 }
