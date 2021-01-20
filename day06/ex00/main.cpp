@@ -6,7 +6,7 @@
 /*   By: kwillum <kwillum@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 09:49:43 by kwillum           #+#    #+#             */
-/*   Updated: 2021/01/20 15:45:21 by kwillum          ###   ########.fr       */
+/*   Updated: 2021/01/20 16:37:52 by kwillum          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 
 int		isStrType(int type)
 {
-	if (type == DNAN || type == DINF || type == FINF || type == DINF)
+	if (type == DNAN || type == FNAN || type == FINF || type == DINF)
 		return (1);
 	return (0);
 }
@@ -102,7 +102,7 @@ int	processStringNumbers(std::string &s, int type)
 {
 	std::cout << "char: impossible\n";
 	std::cout << "int: impossible\n";
-	if (type == FINF || type == DNAN)
+	if (type == FINF || type == FNAN)
 	{
 		std::cout << "float: " << s << std::endl;
 		s.pop_back();
@@ -174,20 +174,29 @@ void printCastedValues(t_values &values, int type)
 		std::cout << "impossible" << std::endl;
 	else
 		std::cout << values.valInt << std::endl;
+	
 	std::cout << "float: ";
 	float	intPart = 0;
 	float	fractPart = modf(values.valFloat, &intPart);
-	std::cout << std::setprecision(std::numeric_limits<float>::digits10 + 1) << values.valFloat;
-	if (type == INT || type == CHAR || intPart == values.valFloat)
+	float	floatPrec = std::numeric_limits<float>::digits10 + 1;
+	std::cout << std::setprecision(floatPrec) << values.valFloat;
+	if (((type == INT || type == CHAR) && std::abs(values.valFloat) < \
+			std::pow(10, floatPrec)) || (intPart == values.valFloat))
 		std::cout<< ".0f";
+	else if (fractPart != 0)
+		std::cout << "f";
+	else if (std::abs(values.valFloat) > std::pow(10,std::numeric_limits<float>::digits10))
+		std::cout << "f";
 	else
-		std::cout<< "f";	
+		std::cout<< "f";
 	std::cout << std::endl;
+
 	std::cout << "double: ";
 	double	intDPart = 0;
 	double	fractDPart = modf(values.valDouble, &intDPart);
+	float	doublePrec = std::numeric_limits<double>::digits10 + 1;
 	std::cout << std::setprecision(std::numeric_limits<double>::digits10 + 1) << values.valDouble;
-	if (type == INT || type == CHAR || values.valDouble == intDPart)
+	if (((type == INT || type == CHAR) && std::abs(values.valDouble) < std::pow(10, doublePrec)) || intDPart == values.valDouble)
 		std::cout<< ".0";
 	std::cout << std::endl;
 }
