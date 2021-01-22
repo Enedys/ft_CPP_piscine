@@ -6,7 +6,7 @@
 /*   By: Kwillum <daniilxod@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 00:00:36 by kwillum           #+#    #+#             */
-/*   Updated: 2021/01/16 15:24:23 by Kwillum          ###   ########.fr       */
+/*   Updated: 2021/01/22 04:51:25 by Kwillum          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 void	create_bureaucreat(Bureaucrat * &b, std::string name, int grade)
 {
 	b = new Bureaucrat(name, grade);
+	std::cout << std::endl;
 }
 
 void	test_bureaucreat(std::string name, int grade)
@@ -37,7 +38,7 @@ void	test_bureaucreat(std::string name, int grade)
 		std::cout << "WTF?\n";
 	}
 
-	std::cout << *b;
+	std::cout << *b << std::endl;
 	try
 	{
 		for (int i = 0; true; i++)
@@ -69,13 +70,20 @@ void	test_bureaucreat(std::string name, int grade)
 
 int		main(void)
 {
+	std::cout << "\033[32m Tests bad grade1: \033[0m\n";
 	test_bureaucreat("Lexa", 228);
+	std::cout << "\033[32m Tests bad grade2: \033[0m\n";
 	test_bureaucreat("Goha", -10);
+	std::cout << "\033[32m Tests bad grade3: \033[0m\n";
 	test_bureaucreat("Miha", 0);
+	std::cout << "\033[32m Tests correct grade1: \033[0m\n";
 	test_bureaucreat("Tonya", 15);
+	std::cout << "\033[32m Tests correct grade2: \033[0m\n";
 	test_bureaucreat("Valya", 150);
+	std::cout << "\033[32m Tests correct grade3: \033[0m\n";
 	test_bureaucreat("Boss", 1);
 
+	std::cout << "\033[32m Tests to output: \033[0m\n";
 	Bureaucrat a("One", 2);
 	Bureaucrat b("Two", 22);
 	std::cout << a << std::endl;
