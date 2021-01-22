@@ -6,21 +6,19 @@
 /*   By: Kwillum <daniilxod@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 21:26:22 by kwillum           #+#    #+#             */
-/*   Updated: 2021/01/12 01:38:59 by Kwillum          ###   ########.fr       */
+/*   Updated: 2021/01/22 02:39:45 by Kwillum          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Character.hpp"
 
-int Character::_apMax = 40;
-int Character::_apRec = 10;
-
-Character::Character() : _name("Default_name"), _ap(0), _ptrWeapon(NULL)
+Character::Character() :
+_name("Default_name"),  _apMax(40), _ap(0), _apRec(10), _ptrWeapon(NULL)
 {
 }
 
 Character::Character(std::string const & name) :
-_name(name), _ap(_apMax), _ptrWeapon(NULL)
+_name(name), _apMax(40), _ap(_apMax), _apRec(10), _ptrWeapon(NULL)
 {
 }
 
@@ -68,6 +66,8 @@ std::string const	&Character::getName() const
 
 Character	&Character::operator=(const Character &toCopy)
 {
+	if (this == &toCopy)
+		return (*this);
 	_name = toCopy._name;
 	_ap = toCopy._ap;
 	_ptrWeapon = toCopy._ptrWeapon;

@@ -6,7 +6,7 @@
 /*   By: Kwillum <daniilxod@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 21:26:22 by kwillum           #+#    #+#             */
-/*   Updated: 2021/01/11 22:37:46 by Kwillum          ###   ########.fr       */
+/*   Updated: 2021/01/22 02:27:54 by Kwillum          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void		Enemy::takeDamage(int damage)
 
 Enemy	&Enemy::operator=(const Enemy &toCopy)
 {
+	if (this == &toCopy)
+		return (*this);
 	_hp = toCopy._hp;
 	_type = toCopy._type;
 	return (*this);

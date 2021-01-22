@@ -6,7 +6,7 @@
 /*   By: Kwillum <daniilxod@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 21:26:22 by kwillum           #+#    #+#             */
-/*   Updated: 2021/01/11 22:40:56 by Kwillum          ###   ########.fr       */
+/*   Updated: 2021/01/22 02:25:43 by Kwillum          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ SuperMutant::SuperMutant(const SuperMutant &toCopy) : Enemy(toCopy)
 
 SuperMutant	&SuperMutant::operator=(const SuperMutant &toCopy)
 {
+	if (this == &toCopy)
+		return (*this);
 	*((Enemy *)this) = toCopy;
 	return (*this);
 }

@@ -6,7 +6,7 @@
 /*   By: Kwillum <daniilxod@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 21:26:22 by kwillum           #+#    #+#             */
-/*   Updated: 2021/01/12 01:16:47 by Kwillum          ###   ########.fr       */
+/*   Updated: 2021/01/22 02:38:44 by Kwillum          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ class Character
 {
 private:
 	std::string			_name;
+	int					_apMax;
 	int					_ap;
-	static int			_apMax;
-	static int			_apRec;
+	int					_apRec;
 	AWeapon				*_ptrWeapon;
 	Character();
 public:

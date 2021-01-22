@@ -6,7 +6,7 @@
 /*   By: Kwillum <daniilxod@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 18:37:28 by Kwillum           #+#    #+#             */
-/*   Updated: 2021/01/13 00:23:58 by Kwillum          ###   ########.fr       */
+/*   Updated: 2021/01/22 04:04:39 by Kwillum          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ class AMateria
 	private:
 		std::string		_type;
 		unsigned int	_xp;
-	public:
 		AMateria();
+	public:
 		AMateria(std::string const & type);
 		AMateria(const AMateria &toCopy);
 		std::string const &		getType() const;

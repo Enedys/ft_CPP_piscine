@@ -6,7 +6,7 @@
 /*   By: Kwillum <daniilxod@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 19:12:12 by Kwillum           #+#    #+#             */
-/*   Updated: 2021/01/12 19:13:29 by Kwillum          ###   ########.fr       */
+/*   Updated: 2021/01/22 04:09:20 by Kwillum          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ Cure::Cure(const Cure &toCopy) : AMateria(toCopy)
 
 Cure	&Cure::operator=(const Cure &toCopy)
 {
+	if (this == &toCopy)
+		return (*this);
 	*((AMateria *)this) = toCopy;
 	return (*this);
 }

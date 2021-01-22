@@ -6,7 +6,7 @@
 /*   By: Kwillum <daniilxod@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 20:01:14 by kwillum           #+#    #+#             */
-/*   Updated: 2021/01/11 20:48:24 by Kwillum          ###   ########.fr       */
+/*   Updated: 2021/01/22 01:38:00 by Kwillum          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,13 @@ Sorcerer::~Sorcerer()
 Sorcerer::Sorcerer(const Sorcerer &toCopy)
 {
 	*this = toCopy;
+	std::cout << _name << ", " << _title << ", is born!\n";
 }
 
 Sorcerer	&Sorcerer::operator=(const Sorcerer &toCopy)
 {
+	if (this == &toCopy)
+		return (*this);
 	_name = toCopy._name;
 	_title = toCopy._title;
 	return (*this);

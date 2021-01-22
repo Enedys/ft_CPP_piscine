@@ -6,12 +6,11 @@
 /*   By: Kwillum <daniilxod@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 13:42:22 by kwillum           #+#    #+#             */
-/*   Updated: 2021/01/12 17:44:36 by Kwillum          ###   ########.fr       */
+/*   Updated: 2021/01/22 03:55:03 by Kwillum          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Squad.hpp"
-#include "unistd.h"
 
 Squad::Squad() : _unitsInSquad(0), _listSquad(NULL)
 {
@@ -34,6 +33,7 @@ ISpaceMarine	*Squad::getUnit(int N) const
 	else
 	{
 		t_list	*curUnit = _listSquad;
+		for (int i = 0; i < N; i++)
 			curUnit = curUnit->nextUnit;
 		return (curUnit->data);
 	}
@@ -46,7 +46,6 @@ int				Squad::push(ISpaceMarine *item)
 	if (!_listSquad)
 	{
 		_listSquad = newElement(item);
-		std::cout << "H1\n";
 		return (_listSquad ? ++_unitsInSquad : 0);
 	}
 	t_list	*squadUnit = _listSquad;
@@ -79,6 +78,8 @@ Squad::Squad(const Squad &toCopy)
 
 Squad	&Squad::operator=(const Squad &toCopy)
 {
+	if (this == &toCopy)
+		return (*this);
 	removeList(_listSquad);
 	_listSquad = deepCopy(toCopy._listSquad);
 	if (_listSquad)
@@ -109,14 +110,16 @@ t_list		*deepCopy(t_list *listSquad)
 {
 	if (!listSquad)
 		return (NULL);
-	t_list	*newList = newElement(listSquad->data);
+	t_list	*newList = newElement((listSquad->data ?\
+									listSquad->data->clone() : NULL));
 	if (!newList)
 		return (NULL);
 	t_list	*tmpPtr = newList;
 	listSquad = listSquad->nextUnit;
 	while (listSquad)
 	{
-		tmpPtr->nextUnit = newElement(listSquad->data);
+		tmpPtr->nextUnit = newElement((listSquad->data ?\
+									listSquad->data->clone() : NULL));
 		if (!tmpPtr->nextUnit)
 			return (removeList(newList) ?\
 					(t_list *)NULL : (t_list *)NULL);

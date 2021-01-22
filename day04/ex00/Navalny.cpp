@@ -1,42 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Peon.cpp                                           :+:      :+:    :+:   */
+/*   Navalny.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Kwillum <daniilxod@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/11 20:48:30 by kwillum           #+#    #+#             */
-/*   Updated: 2021/01/22 01:42:18 by Kwillum          ###   ########.fr       */
+/*   Created: 2021/01/22 01:44:58 by Kwillum           #+#    #+#             */
+/*   Updated: 2021/01/22 01:47:51 by Kwillum          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Peon.hpp"
+#include "Navalny.hpp"
 
-Peon::Peon() : Victim("Default_name")
+Navalny::Navalny() : Victim("Default_name")
 {
 }
 
-Peon::Peon(const std::string &name) : Victim(name)
+Navalny::Navalny(const std::string &name) : Victim(name)
 {
-	std::cout << "Zog zog.\n";
+	std::cout << "Hey, I'm back in Russia!\n";
 }
 
-Peon::~Peon()
+Navalny::~Navalny()
 {
-	std::cout << "Bleuark...\n";
+	std::cout << "Ooh no, back to the prison :(\n";
 }
 
-Peon::Peon(const Peon &toCopy) : Victim(toCopy)
+Navalny::Navalny(const Navalny &toCopy) : Victim(toCopy)
 {
-	std::cout << "Zog zog.\n";
+	std::cout << "Hey, I'm back in Russia!\n";
 }
 
-void	Peon::getPolymorphed() const
+void	Navalny::getPolymorphed() const
 {
-	std::cout << _name << " has been turned into a pink pony!\n";
+	std::cout << _name << " has been turned into a Berlin patient!\n";
 }
 
-Peon	&Peon::operator=(const Peon &toCopy)
+Navalny	&Navalny::operator=(const Navalny &toCopy)
 {
 	if (this == &toCopy)
 		return (*this);

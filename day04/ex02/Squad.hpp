@@ -6,7 +6,7 @@
 /*   By: Kwillum <daniilxod@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 13:42:22 by kwillum           #+#    #+#             */
-/*   Updated: 2021/01/12 16:54:17 by Kwillum          ###   ########.fr       */
+/*   Updated: 2021/01/22 03:09:58 by Kwillum          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,5 @@ public:
 t_list		*deepCopy(t_list *listSquad);
 int			removeList(t_list *listSquad);
 t_list		*newElement(ISpaceMarine *data);
-
 
 #endif

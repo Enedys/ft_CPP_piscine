@@ -6,7 +6,7 @@
 /*   By: Kwillum <daniilxod@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 20:27:36 by kwillum           #+#    #+#             */
-/*   Updated: 2021/01/11 21:03:01 by Kwillum          ###   ########.fr       */
+/*   Updated: 2021/01/22 01:37:43 by Kwillum          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ Victim::~Victim()
 Victim::Victim(const Victim &toCopy)
 {
 	*this = toCopy;
+	std::cout << "Some random victim called " << _name << " just appeared!\n";
 }
 
 void	Victim::_copy(const Victim &v)
@@ -38,6 +39,8 @@ void	Victim::_copy(const Victim &v)
 
 Victim	&Victim::operator=(const Victim &toCopy)
 {
+	if (this == &toCopy)
+		return (*this);
 	_copy(toCopy);
 	return (*this);
 }

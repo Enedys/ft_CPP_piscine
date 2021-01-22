@@ -6,7 +6,7 @@
 /*   By: Kwillum <daniilxod@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 18:58:58 by kwillum           #+#    #+#             */
-/*   Updated: 2021/01/13 00:43:26 by Kwillum          ###   ########.fr       */
+/*   Updated: 2021/01/22 04:16:19 by Kwillum          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ std::string const &Character::getName() const
 
 Character	&Character::operator=(const Character &toCopy)
 {
+	if (this == &toCopy)
+		return (*this);
 	_name = toCopy._name;
 	_alreadyEquiped = 0;
 	for (int i = 0; i < _inventoryVolume; i++)

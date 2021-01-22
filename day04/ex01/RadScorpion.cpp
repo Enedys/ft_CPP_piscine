@@ -6,7 +6,7 @@
 /*   By: Kwillum <daniilxod@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 21:26:22 by kwillum           #+#    #+#             */
-/*   Updated: 2021/01/11 22:45:55 by Kwillum          ###   ########.fr       */
+/*   Updated: 2021/01/22 02:28:46 by Kwillum          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ RadScorpion::RadScorpion(const RadScorpion &toCopy) : Enemy(toCopy)
 
 RadScorpion	&RadScorpion::operator=(const RadScorpion &toCopy)
 {
+	if (this == &toCopy)
+		return (*this);
 	*((Enemy *)this) = toCopy;
 	return (*this);
 }

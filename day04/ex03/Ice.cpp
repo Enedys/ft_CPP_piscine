@@ -6,7 +6,7 @@
 /*   By: Kwillum <daniilxod@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 18:58:58 by kwillum           #+#    #+#             */
-/*   Updated: 2021/01/12 19:11:57 by Kwillum          ###   ########.fr       */
+/*   Updated: 2021/01/22 04:08:33 by Kwillum          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ Ice::Ice(const Ice &toCopy) : AMateria(toCopy)
 
 Ice	&Ice::operator=(const Ice &toCopy)
 {
+	if (this == &toCopy)
+		return (*this);
 	*((AMateria *)this) = toCopy;
 	return (*this);
 }

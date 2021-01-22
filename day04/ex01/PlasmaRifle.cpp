@@ -6,7 +6,7 @@
 /*   By: Kwillum <daniilxod@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 21:26:22 by kwillum           #+#    #+#             */
-/*   Updated: 2021/01/11 22:27:12 by Kwillum          ###   ########.fr       */
+/*   Updated: 2021/01/22 02:19:38 by Kwillum          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void		PlasmaRifle::attack() const
 
 PlasmaRifle	&PlasmaRifle::operator=(const PlasmaRifle &toCopy)
 {
+	if (this == &toCopy)
+		return (*this);
 	*((AWeapon *)this) = toCopy;
 	return (*this);
 }

@@ -6,7 +6,7 @@
 /*   By: Kwillum <daniilxod@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 21:26:22 by kwillum           #+#    #+#             */
-/*   Updated: 2021/01/11 22:36:47 by Kwillum          ###   ########.fr       */
+/*   Updated: 2021/01/22 02:27:48 by Kwillum          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ public:
 	Enemy(const Enemy &toCopy);
 	Enemy(int hp, const std::string &name);
 	virtual ~Enemy();
-	std::string const	&getType() const;
 	int					getHP() const;
+	std::string const	&getType() const;
 	virtual void		takeDamage(int damage);
 	Enemy &operator=(const Enemy &toCopy);
 };

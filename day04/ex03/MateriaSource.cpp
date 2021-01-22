@@ -32,15 +32,16 @@ MateriaSource::MateriaSource(const MateriaSource &toCopy) : _alreadyLearned(0)
 	for (int i = 0; i < _memoryVolume; i++)
 	{
 		if (toCopy._materiaSrcs[i])
-		{
 			_materiaSrcs[i] = toCopy._materiaSrcs[i]->clone();
+		if (_materiaSrcs[i])
 			_alreadyLearned++;
-		}
 	}
 }
 
 MateriaSource	&MateriaSource::operator=(const MateriaSource &toCopy)
 {
+	if (this == &toCopy)
+		return (*this);
 	for (int i = 0; i < _memoryVolume; i++)
 		if (_materiaSrcs[i])
 			delete _materiaSrcs[i];
