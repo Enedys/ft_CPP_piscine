@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kwillum <daniilxod@gmail.com>              +#+  +:+       +#+        */
+/*   By: kwillum <kwillum@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 23:33:03 by kwillum           #+#    #+#             */
-/*   Updated: 2021/01/16 16:20:58 by Kwillum          ###   ########.fr       */
+/*   Updated: 2021/01/22 14:42:18 by kwillum          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ const char		*Bureaucrat::GradeTooLowException::what() const throw()
 
 Bureaucrat	&Bureaucrat::operator=(const Bureaucrat &toCopy)
 {
+	if (this == &toCopy)
+		return (*this);
 	if (_correctGrade(toCopy._grade))
 		_grade = toCopy._grade;
 	return (*this);

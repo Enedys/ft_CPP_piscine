@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ShrubberyCreationForm.hpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kwillum <daniilxod@gmail.com>              +#+  +:+       +#+        */
+/*   By: kwillum <kwillum@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 16:28:58 by kwillum           #+#    #+#             */
-/*   Updated: 2021/01/16 22:08:28 by Kwillum          ###   ########.fr       */
+/*   Updated: 2021/01/22 17:42:47 by kwillum          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ class ShrubberyCreationForm : public Form
 {
 private:
 	const std::string			_target;
-	static const std::string	_name;
 	static const std::string	_tree;
 	ShrubberyCreationForm	&operator=(const ShrubberyCreationForm &toCopy);
 	ShrubberyCreationForm();

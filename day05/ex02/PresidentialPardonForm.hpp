@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PresidentialPardonForm.hpp                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kwillum <daniilxod@gmail.com>              +#+  +:+       +#+        */
+/*   By: kwillum <kwillum@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 16:28:58 by kwillum           #+#    #+#             */
-/*   Updated: 2021/01/16 17:18:10 by Kwillum          ###   ########.fr       */
+/*   Updated: 2021/01/22 18:08:52 by kwillum          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ class PresidentialPardonForm : public Form
 {
 private:
 	const std::string			_target;
-	static const std::string	_name;
 	PresidentialPardonForm	&operator=(const PresidentialPardonForm &toCopy);
 	PresidentialPardonForm();
 public:

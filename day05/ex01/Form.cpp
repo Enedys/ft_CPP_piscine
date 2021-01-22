@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   Form.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kwillum <daniilxod@gmail.com>              +#+  +:+       +#+        */
+/*   By: kwillum <kwillum@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 01:13:00 by kwillum           #+#    #+#             */
-/*   Updated: 2021/01/16 16:24:28 by Kwillum          ###   ########.fr       */
+/*   Updated: 2021/01/22 14:41:45 by kwillum          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Form.hpp"
 
-Form::Form() : _name("Default_name"), _signed(0), _grade2Sign(150)
+Form::Form() : _name("Default_name"), _grade2Sign(150), _grade2Exec(150), _signed(0)
 {
 }
 
@@ -21,17 +21,19 @@ Form::~Form()
 }
 
 Form::Form(const Form &toCopy) :
-	_name(toCopy._name), _grade2Sign(toCopy._grade2Sign), _signed(toCopy._signed)
+	_name(toCopy._name), _grade2Sign(toCopy._grade2Sign), _grade2Exec(toCopy._grade2Exec), _signed(toCopy._signed)
 {
 	if (_correctGrade(_grade2Sign))
 		return ;
 }
 
-Form::Form(std::string const &name, int grade = 150) :
-	_name(name),  _grade2Sign(grade), _signed(false)
+Form::Form(std::string const &name, int grade = 150, int gradeExec = 150) :
+	_name(name),  _grade2Sign(grade), _grade2Exec(gradeExec), _signed(false)
 {
 	if (_correctGrade(_grade2Sign))
-		return ;
+		;
+	if (_correctGrade(_grade2Exec))
+		;
 }
 
 int					Form::_correctGrade(int grade)
@@ -68,6 +70,7 @@ bool				Form::getSignStatus() const
 
 Form	&Form::operator=(const Form &toCopy)
 {
+	(void)toCopy;
 	return (*this);
 }
 
@@ -87,12 +90,3 @@ const char	*Form::GradeTooLowException::what() const throw()
 {
 	return ("Form::Exception Too LOW grade!");
 }
-
-
-
-	// if (_signed)
-	// 	throw FormAlreadySignedException(); 
-// const char	*Form::FormAlreadySignedException::what() const throw()
-// {
-// 	return ("Form::Exception Form already SIGNED!\n");
-// }

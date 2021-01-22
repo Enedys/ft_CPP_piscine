@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Intern.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kwillum <daniilxod@gmail.com>              +#+  +:+       +#+        */
+/*   By: kwillum <kwillum@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 00:47:19 by kwillum           #+#    #+#             */
-/*   Updated: 2021/01/18 01:30:12 by Kwillum          ###   ########.fr       */
+/*   Updated: 2021/01/22 17:56:27 by kwillum          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define INTERN_HPP
 # include <iostream>
 # include <string>
-# include <locale> //std::locale, std::tolower
+# include <locale>
 # include "ShrubberyCreationForm.hpp"
 # include "PresidentialPardonForm.hpp"
 # include "RobotomyRequestForm.hpp"

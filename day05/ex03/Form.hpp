@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Form.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kwillum <daniilxod@gmail.com>              +#+  +:+       +#+        */
+/*   By: kwillum <kwillum@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 01:13:00 by kwillum           #+#    #+#             */
-/*   Updated: 2021/01/18 00:17:48 by Kwillum          ###   ########.fr       */
+/*   Updated: 2021/01/22 18:15:55 by kwillum          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,10 @@ class Form
 		std::string const	_name;
 		const int			_grade2Sign;
 		const int			_grade2Exec;
+		bool				_signed;
 		Form();
 		Form &operator=(const Form &toCopy);
 		int					_correctGrade();
-	protected:
-		bool				_signed;
 	public:
 		Form(const Form &toCopy);
 		Form(std::string const &name, int grade2Sign, int grade2Exec);

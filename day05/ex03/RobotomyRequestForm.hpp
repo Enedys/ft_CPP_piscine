@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RobotomyRequestForm.hpp                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kwillum <daniilxod@gmail.com>              +#+  +:+       +#+        */
+/*   By: kwillum <kwillum@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 16:28:58 by kwillum           #+#    #+#             */
-/*   Updated: 2021/01/18 00:18:27 by Kwillum          ###   ########.fr       */
+/*   Updated: 2021/01/22 18:07:31 by kwillum          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,14 @@ class RobotomyRequestForm : public Form
 {
 private:
 	const std::string			_target;
-	static const std::string	_name;
 	RobotomyRequestForm	&operator=(const RobotomyRequestForm &toCopy);
 	RobotomyRequestForm();
 public:
 	RobotomyRequestForm(const RobotomyRequestForm &toCopy);
 	RobotomyRequestForm(const std::string &target);
-	void				execute(const Bureaucrat &b) const;
-	const std::string	&getTartget() const;
-	static Form			*formCreator(std::string const &target);
+	void					execute(const Bureaucrat &b) const;
+	const std::string		&getTartget() const;
+	static Form				*formCreator(std::string const &target);
 	virtual ~RobotomyRequestForm();
 };
 

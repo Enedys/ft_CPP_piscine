@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   Form.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kwillum <daniilxod@gmail.com>              +#+  +:+       +#+        */
+/*   By: kwillum <kwillum@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 01:13:00 by kwillum           #+#    #+#             */
-/*   Updated: 2021/01/17 03:39:39 by Kwillum          ###   ########.fr       */
+/*   Updated: 2021/01/22 18:16:40 by kwillum          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Form.hpp"
 
-Form::Form() : _name("Default_name"), _signed(0), _grade2Sign(150), _grade2Exec(150)
+Form::Form() : _name("Default_name"), _grade2Sign(150), _grade2Exec(150), _signed(0)
 {
 }
 
@@ -22,14 +22,14 @@ Form::~Form()
 
 Form::Form(const Form &toCopy) :
 	_name(toCopy._name), _grade2Sign(toCopy._grade2Sign),\
-	_signed(toCopy._signed), _grade2Exec(toCopy._grade2Exec)
+	_grade2Exec(toCopy._grade2Exec), _signed(toCopy._signed)
 {
 	if (_correctGrade())
 		return ;
 }
 
 Form::Form(std::string const &name, int grade2Sign = 150, int grade2Exec=150) :
-	_name(name),  _grade2Sign(grade2Sign), _signed(false), _grade2Exec(grade2Exec)
+	_name(name),  _grade2Sign(grade2Sign), _grade2Exec(grade2Exec), _signed(false)
 {
 	if (_correctGrade())
 		return ;
@@ -82,6 +82,7 @@ int					Form::getExecutorGrade() const
 
 Form	&Form::operator=(const Form &toCopy)
 {
+	(void)toCopy;
 	return (*this);
 }
 
@@ -98,11 +99,6 @@ const char	*Form::GradeTooHighException::what() const throw()
 	return ("Form::Exception Too HIGH grade!");
 }
 
-const char	*Form::FormBadAllocException::what() const throw()
-{
-	return ("Form::Exception Bad allocation with new Form!");
-}
-
 const char	*Form::GradeTooLowException::what() const throw()
 {
 	return ("Form::Exception Too LOW grade!");
@@ -116,4 +112,9 @@ const char	*Form::FormAlreadySignedException::what() const throw()
 const char	*Form::FormNotSignedYetException::what() const throw()
 {
 	return ("Form::Exception Form NOT SIGNED yet!");
+}
+
+const char	*Form::FormBadAllocException::what() const throw()
+{
+	return ("Form::Exception Bad allocation with new Form!");
 }

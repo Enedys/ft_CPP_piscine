@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   PresidentialPardonForm.cpp                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kwillum <daniilxod@gmail.com>              +#+  +:+       +#+        */
+/*   By: kwillum <kwillum@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 16:28:58 by kwillum           #+#    #+#             */
-/*   Updated: 2021/01/17 04:04:37 by Kwillum          ###   ########.fr       */
+/*   Updated: 2021/01/22 18:15:02 by kwillum          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PresidentialPardonForm.hpp"
 
-const std::string PresidentialPardonForm::_name = "Presidential Pardon";
+// const std::string PresidentialPardonForm::_name = "Presidential Pardon";
 
-PresidentialPardonForm::PresidentialPardonForm() : Form(_name, 25, 5), _target("Deault_target")
+PresidentialPardonForm::PresidentialPardonForm() : Form("Presidential Pardon", 25, 5), _target("Deault_target")
 {
 }
 
@@ -26,7 +26,7 @@ PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &toC
 {
 }
 
-PresidentialPardonForm::PresidentialPardonForm(const std::string &target) :  Form(_name, 25, 5), _target(target)
+PresidentialPardonForm::PresidentialPardonForm(const std::string &target) :  Form("Presidential Pardon", 25, 5), _target(target)
 {
 }
 
@@ -60,4 +60,3 @@ Form				*PresidentialPardonForm::formCreator(std::string const &target)
 	}
 	return (newForm);
 }
-

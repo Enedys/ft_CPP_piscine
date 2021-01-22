@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ShrubberyCreationForm.cpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kwillum <daniilxod@gmail.com>              +#+  +:+       +#+        */
+/*   By: kwillum <kwillum@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 16:28:58 by kwillum           #+#    #+#             */
-/*   Updated: 2021/01/17 04:04:11 by Kwillum          ###   ########.fr       */
+/*   Updated: 2021/01/22 18:14:33 by kwillum          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,8 @@ const std::string ShrubberyCreationForm::_tree =
 "        ###\n"
 "        ### mh";
 
-const std::string ShrubberyCreationForm::_name = "Shrubbery Creation";
 
-ShrubberyCreationForm::ShrubberyCreationForm() : Form(_name, 145, 137), _target("Deault_target")
+ShrubberyCreationForm::ShrubberyCreationForm() : Form("Shrubbery Creation", 145, 137), _target("Deault_target")
 {
 }
 
@@ -45,7 +44,7 @@ ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &toCopy
 {
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target) :  Form(_name, 145, 137), _target(target)
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target) :  Form("Shrubbery Creation", 145, 137), _target(target)
 {
 }
 

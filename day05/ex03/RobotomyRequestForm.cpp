@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   RobotomyRequestForm.cpp                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kwillum <daniilxod@gmail.com>              +#+  +:+       +#+        */
+/*   By: kwillum <kwillum@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 16:28:58 by kwillum           #+#    #+#             */
-/*   Updated: 2021/01/17 04:04:06 by Kwillum          ###   ########.fr       */
+/*   Updated: 2021/01/22 18:14:48 by kwillum          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RobotomyRequestForm.hpp"
 
-const std::string RobotomyRequestForm::_name = "Robotomy Request";
+// const std::string RobotomyRequestForm::_name = "Robotomy Request";
 
-RobotomyRequestForm::RobotomyRequestForm() : Form(_name, 72, 45), _target("Deault_target")
+RobotomyRequestForm::RobotomyRequestForm() : Form("Robotomy Request", 72, 45), _target("Deault_target")
 {
 	std::srand(std::time(0));
 }
@@ -28,7 +28,7 @@ RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &toCopy) : Fo
 	std::srand(std::time(0));
 }
 
-RobotomyRequestForm::RobotomyRequestForm(const std::string &target) :  Form(_name, 72, 45), _target(target)
+RobotomyRequestForm::RobotomyRequestForm(const std::string &target) :  Form("Robotomy Request", 72, 45), _target(target)
 {
 	std::srand(std::time(0));
 }

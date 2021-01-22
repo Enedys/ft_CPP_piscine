@@ -54,6 +54,12 @@ class Array
 				throw (std::exception());
 			return (_array[index]);
 		};
+		const T	&operator[](const int index) const
+		{
+			if (index < 0 || index >= _size)
+				throw (std::exception());
+			return (_array[index]);
+		};
 };
 
 #endif

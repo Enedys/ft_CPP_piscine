@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Intern.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kwillum <daniilxod@gmail.com>              +#+  +:+       +#+        */
+/*   By: kwillum <kwillum@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 00:47:19 by kwillum           #+#    #+#             */
-/*   Updated: 2021/01/18 02:43:39 by Kwillum          ###   ########.fr       */
+/*   Updated: 2021/01/22 18:02:33 by kwillum          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ Form	*Intern::makeForm(const std::string &name, const std::string &target)
 	Form		*newForm = NULL;
 	std::string	nameCopy(name);
 
-	for (int i = 0; i < name.length(); i++)
+	for (size_t i = 0; i < name.length(); i++)
 		nameCopy[i] = std::tolower(name[i]);
 
 	for (int i = 0; i < _formNumbers; i++)
