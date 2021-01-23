@@ -6,7 +6,7 @@
 /*   By: kwillum <kwillum@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 09:49:43 by kwillum           #+#    #+#             */
-/*   Updated: 2021/01/20 16:37:52 by kwillum          ###   ########.fr       */
+/*   Updated: 2021/01/23 16:34:56 by kwillum          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,20 @@
 # define FINF	7
 # define DINF	8
 # define toType(number, type) static_cast<type>(number)
+
+template <class T>
+int toVarType(std::stringstream &ss, std::string &s, T &var)
+{
+	ss << s;
+	ss >> var;
+	if (ss.fail())
+	{
+		ss.clear();
+		return (1);
+	}
+	return (0);
+}
+
 
 int		isStrType(int type)
 {
@@ -114,68 +128,28 @@ int	processStringNumbers(std::string &s, int type)
 	return (0);
 }
 
-void processIntNumber(std::stringstream &ss, t_values &values)
-{
-	ss >> values.valInt;
-	if (values.valInt > CHAR_MAX || values.valInt < CHAR_MIN)
-		values.error |= 1;
-	else
-		values.valChar = toType(values.valInt, char);
-	values.valFloat = toType(values.valInt, float);
-	values.valDouble = toType(values.valInt, double);
-}
-
-void processFloatNumber(std::stringstream &ss, t_values &values)
-{
-	ss << ".f";
-	ss >> values.valFloat;
-	if (values.valFloat > CHAR_MAX || values.valFloat < CHAR_MIN)
-		values.error |= 1;
-	else
-		values.valChar = toType(values.valFloat, char);
-	if (values.valFloat > INT_MAX || values.valFloat < INT_MIN)
-		values.error |= 2;
-	else
-		values.valInt = toType(values.valFloat, int);
-	values.valDouble = toType(values.valFloat, double);
-}
-
-void processDoubleNumber(std::stringstream &ss, t_values &values)
-{
-	ss >> values.valDouble;
-	if (values.valDouble > CHAR_MAX || values.valDouble < CHAR_MIN)
-		values.error |= 1;
-	else
-		values.valChar = toType(values.valDouble, char);
-	if (values.valDouble > INT_MAX || values.valDouble < INT_MIN)
-		values.error |= 2;
-	else
-		values.valInt = toType(values.valDouble, int);
-	values.valFloat = toType(values.valDouble, float);
-}
-
-void processCharNumber(std::stringstream &ss, t_values &values)
-{
-	ss >> values.valChar;
-	values.valInt = toType(values.valChar, int);
-	values.valFloat = toType(values.valChar, float);
-	values.valDouble = toType(values.valChar, double);
-}
-
 void printCastedValues(t_values &values, int type)
 {
 	std::cout << "char: ";
-	if (std::isprint(values.valChar))
-		 std::cout << '\'' << values.valChar << '\'' << std::endl;
+	if (!values.error && std::isprint(values.valChar))
+		std::cout << '\'' << values.valChar << '\'' << std::endl;
+	else if (!values.error && std::isprint(values.valChar))
+		std::cout << "Non displayable" << std::endl;
 	else
-		std::cout << (values.error & 1 ? "impossible" : "Non displayable") << std::endl;
+		std::cout << "impossible" << std::endl;
+	
 	std::cout << "int: ";
-	if (values.error & 2)
+	if (values.error > 1)
 		std::cout << "impossible" << std::endl;
 	else
 		std::cout << values.valInt << std::endl;
-	
+
 	std::cout << "float: ";
+	if (values.error > 2)
+	{
+		std::cout << "impossible" << std::endl;
+		return ;
+	}
 	float	intPart = 0;
 	float	fractPart = modf(values.valFloat, &intPart);
 	float	floatPrec = std::numeric_limits<float>::digits10 + 1;
@@ -185,13 +159,18 @@ void printCastedValues(t_values &values, int type)
 		std::cout<< ".0f";
 	else if (fractPart != 0)
 		std::cout << "f";
-	else if (std::abs(values.valFloat) > std::pow(10,std::numeric_limits<float>::digits10))
+	else if (std::abs(values.valFloat) > std::pow(10, std::numeric_limits<float>::digits10))
 		std::cout << "f";
 	else
 		std::cout<< "f";
 	std::cout << std::endl;
 
 	std::cout << "double: ";
+	if (values.error > 3)
+	{
+		std::cout << "impossible" << std::endl;
+		return ;
+	}
 	double	intDPart = 0;
 	double	fractDPart = modf(values.valDouble, &intDPart);
 	float	doublePrec = std::numeric_limits<double>::digits10 + 1;
@@ -203,6 +182,12 @@ void printCastedValues(t_values &values, int type)
 
 int main(int argc, char *argv[])
 {
+	// std::stringstream	sss;
+	// sss << "42.2f";
+	// float a;
+	// sss >> a;
+	// std::cout << "Error code: " << sss.fail() << "\nNumber: " << a << std::endl;
+	// exit(0);
 	if (argc != 2)
 	{
 		std::cout << "Error: Invalid numbers of argumet;\n";
@@ -220,20 +205,53 @@ int main(int argc, char *argv[])
 		std::cout << "Error: Not a valid string;\n";
 	 		return (1);
 	}
+
 	std::stringstream	ss;
-	ss << s;
 	t_values	retValues;
 	std::memset(&retValues, 0, sizeof(t_values));
 	if (isStrType(type))
 		return (processStringNumbers(s, type));
-	if (type == INT)
-		processIntNumber(ss, retValues);
-	else if (type == FLOAT)
-		processFloatNumber(ss, retValues);
-	else if (type == DOUBLE)
-		processDoubleNumber(ss, retValues);
-	else
-		processCharNumber(ss, retValues);
+	
+	int res = 0;
+	if (type == FLOAT)
+		s = s.substr(0, s.find('.'));
+	if (!retValues.error && (res = toVarType(ss, s,retValues.valDouble)))
+		retValues.error = 4;
+	std::cout << retValues.error << " : " << retValues.valDouble << std::endl;
+	if (!retValues.error && (res = toVarType(ss, s,retValues.valFloat)))
+		retValues.error = 3;
+	std::cout << retValues.error << " : " << retValues.valDouble << std::endl;
+	if (!retValues.error && (res = toVarType(ss, s,retValues.valInt)))
+		retValues.error = 2;
+	std::cout << retValues.error << " : " << retValues.valDouble << std::endl;
+	if (!retValues.error && (res = toVarType(ss, s,retValues.valChar)))
+		retValues.error = 1;
+	std::cout << retValues.error << " : " << retValues.valDouble << std::endl;
 	printCastedValues(retValues, type);
+	
+
+		
+
+	// if (values.valDouble > CHAR_MAX || values.valDouble < CHAR_MIN)
+	// 	values.error |= 1;
+	// else
+	// 	values.valChar = toType(values.valDouble, char);
+	// if (values.valDouble > INT_MAX || values.valDouble < INT_MIN)
+	// 	values.error |= 2;
+	// else
+	// 	values.valInt = toType(values.valDouble, int);
+	// values.valFloat = toType(values.valDouble, float);
+	
+	// if (type == INT)
+	// 	processIntNumber(ss, retValues);
+	// else if (type == FLOAT)
+	// 	processFloatNumber(ss, retValues);
+	// else if (type == DOUBLE)
+	// 	processDoubleNumber(ss, retValues);
+	// else
+	// 	processCharNumber(ss, retValues);
+
+	// 
+	// printCastedValues(retValues, type);
 	return (0);
 }
