@@ -1,7 +1,9 @@
 #include <iostream>
 #include <string>
-#include <cstdlib>
 #include <ctime>
+#include <cctype>
+#include <cstdlib>
+#include <unistd.h>
 
 class Base
 {
@@ -13,18 +15,29 @@ class A : public Base {};
 class B : public Base {};
 class C : public Base {};
 
+void	startSeed()
+{
+	srand(time(NULL));
+}
+
 Base	*generate(void)
 {
-	int	rand = std::rand() % 3;
+	static int	seed = 0;
+	if (!seed)
+	{
+		startSeed();
+		seed = 1;
+	}
+	int	randn = rand() % 3;
 	Base	*newItem = static_cast<Base *>(NULL);
 	try
 	{
-		if (rand == 0)
+		if (randn == 0)
 		{
 			newItem = new A;
 			std::cout << "A was created\n";
 		}
-		else if (rand == 1)
+		else if (randn == 1)
 		{
 			newItem = new B;
 			std::cout << "B was created\n";
@@ -95,18 +108,20 @@ void	identify_from_reference( Base & p)
 
 int main()
 {
-	std::srand(std::time(0));
-	for (int i = 0; i < 50; i++)
+	Base	*p = NULL;
+	for (int i = 0; i < 25; i++)
 	{
 		std::cout << "\033[31m Test: " << i + 1 << "\033[0m \n";
-		Base	*p = generate();
-		std::cout << "By pointer: ";
-		identify_from_pointer(p);
-		std::cout << "By reference: ";
-		identify_from_reference(*p);
-		std::cout << std::endl;
-
-		delete p;
+		p = generate();
+		if (p)
+		{
+			std::cout << "By pointer: ";
+			identify_from_pointer(p);
+			std::cout << "By reference: ";
+			identify_from_reference(*p);
+			std::cout << std::endl;
+			delete p;
+		}
 	}
 	return (0);
 }
