@@ -1,9 +1,8 @@
 #include <iostream>
 #include <string>
 #include <ctime>
+#include <cctype>
 #include <cstdlib>
-
-#define A "65 - A, 90 - Z, 97 - a, 122 - z, 48 - 0, 57 - 9"
 
 struct Data {
 	std::string	s1;
@@ -22,21 +21,30 @@ int		getRandomAlphanum()
 		return (48 + randn - 52);
 }
 
-
 void	*serialize(void)
 {
 	char	*seria = NULL;
 	try
 	{
-		seria = new char[16 + sizeof(int)];
+		seria = new char[2 * sizeof(std::string) + sizeof(int)];
 	}
 	catch(const std::exception& e)
 	{
 		std::cerr << e.what() << '\n';
 		return (NULL);
 	}
-	for (int i = 0; i < 16 + sizeof(int); i++)
-		seria[i] = getRandomAlphanum();
+	srand(time(0));
+	bzero(seria, 52);
+	std::string	s(8, '\0');
+	seria[0] = 16;
+	for (size_t j = 1; j < 9; j++)
+		seria[j] = getRandomAlphanum();
+	char	*toInt = seria + sizeof(std::string);
+	for (int i = 0; i < 4; i++)
+		toInt[i] = getRandomAlphanum();
+	seria[sizeof(std::string) + sizeof(int) + 4] = 16;
+	for (size_t j = 1; j < 9; j++)
+		seria[j + sizeof(std::string) + sizeof(int) + 4] = getRandomAlphanum();
 	return (reinterpret_cast<void *>(seria));
 }
 
@@ -44,57 +52,27 @@ Data	*deserialize(void *raw)
 {
 	if (!raw)
 		return (NULL);
-	struct Data *deserializeData = NULL;
-	try
-	{
-		deserializeData = new struct Data;
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-		return (NULL);
-	}
-	char	*ptrToStartSeia = reinterpret_cast<char *>(raw);
-	deserializeData->s1 = std::string(ptrToStartSeia, 8);
-	deserializeData->n = *(reinterpret_cast<int *>(ptrToStartSeia + 8));
-	deserializeData->s2 = std::string(ptrToStartSeia + 8 + sizeof(int), 8);
-	return (deserializeData);
+	return (reinterpret_cast<Data *>(raw));
 }
 
 int main()
 {
-	srand(time(0));
-	struct Data data;
 	void *s = serialize();
-	std::cout << "Raw data representation:\n";
 	if (s)
 	{
-		std::cout <<"S1: ";
-		for (int i = 0; i < 16 + sizeof(4); i++)
-		{
-			if (i == 8)
-			{
-				std::cout << *(reinterpret_cast<int *>(reinterpret_cast<char *>(s) + 8));
-				i += sizeof(int) - 1;
-			}
-			else
-				std::cout << reinterpret_cast<char *>(s)[i];
-			if (i == 7)
-				std::cout << "\nInt N: ";
-			else if (i == sizeof(int) + 8 - 1)
-				std::cout << "\nS2: ";
-		}
+		std::cout << "\033[32mRaw data representation:\033[0m\n";
+		std::cout << "String1:\t" << *reinterpret_cast<std::string *>(s) << std::endl;
+		std::cout << "N:\t\t" << *reinterpret_cast<int *>(reinterpret_cast<char *>(s) + sizeof(std::string)) << std::endl;
+		std::cout << "String2:\t" << *reinterpret_cast<std::string *>(reinterpret_cast<char *>(s) + sizeof(std::string) + sizeof(int) * 2) << std::endl;
 	}
-
 	struct Data *ds = deserialize(s);
-	std::cout << "\n\nDeserialize data representation:\n";
 	if (ds)
 	{
-		std::cout << "String1: " << ds->s1 << std::endl;
-		std::cout << "N: " << ds->n << std::endl;
-		std::cout << "String1: " << ds->s2 << std::endl;
+		std::cout << "\n\033[32mDeserialize data representation:\033[0m\n";
+		std::cout << "String1:\t" << ds->s1 << std::endl;
+		std::cout << "N:\t\t" << ds->n << std::endl;
+		std::cout << "String2:\t" << ds->s2 << std::endl;
 	}
 	delete reinterpret_cast<char *>(s);
-	delete ds;
 	return (0);
 }
