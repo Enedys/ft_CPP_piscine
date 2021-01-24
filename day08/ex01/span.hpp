@@ -12,6 +12,22 @@ class Span
 		std::vector<unsigned int>	_numVec;
 		Span();
 	public:
+		class ValuesPoolAreFool : public std::exception
+		{
+		public:
+			virtual const char *what() const throw();
+		};
+		class InvalidSizeForThatFuction : public std::exception
+		{
+		public:
+			virtual const char *what() const throw();
+		};
+		class AppendedVectorTooBig : public std::exception
+		{
+		public:
+			virtual const char *what() const throw();
+		};
+		void	appendVector(std::vector<unsigned int> &vec);
 		void	addNumber(unsigned int number);
 		unsigned int	shortestSpan();
 		unsigned int	longestSpan();

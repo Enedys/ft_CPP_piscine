@@ -20,21 +20,25 @@ Span::Span(const Span &toCopy)
 
 Span::Span(unsigned int N) : _size(N)
 {
+	_numVec.reserve(_size);
 }
 
 void	Span::addNumber(unsigned int number)
 {
 	if (_numVec.size() == _size)
-		throw std::exception();
+		throw Span::ValuesPoolAreFool();
 	_numVec.push_back(number);
 }
 
 unsigned int	Span::shortestSpan()
 {
-	std::sort(_numVec.begin(), _numVec.end());
-	std::vector<unsigned int>::const_iterator	ctr = _numVec.begin();
+	if (_numVec.size() <= 1)
+		throw Span::InvalidSizeForThatFuction();
+	std::vector<unsigned int>	copyVec(_numVec);
+	std::sort(copyVec.begin(), copyVec.end());
+	std::vector<unsigned int>::const_iterator	ctr = copyVec.begin();
 	std::vector<unsigned int>					_tmp;
-	while (ctr + 1 != _numVec.end())
+	while (ctr + 1 != copyVec.end())
 	{
 		_tmp.push_back(*(ctr + 1) - *ctr);
 		ctr++;
@@ -44,10 +48,36 @@ unsigned int	Span::shortestSpan()
 
 unsigned int	Span::longestSpan()
 {
-	std::sort(_numVec.begin(), _numVec.end());
-	return (_numVec[_numVec.size() - 1] - _numVec[0]);
+	if (_numVec.size() <= 1)
+		throw Span::InvalidSizeForThatFuction();
+	return (*std::max_element(_numVec.begin(), _numVec.end()) -\
+			*std::min_element(_numVec.begin(), _numVec.end()));
 }
+// std::sort(_numVec.begin(), _numVec.end());
+// return (_numVec[_numVec.size() - 1] - _numVec[0]);
 
 Span::~Span()
 {
+}
+
+void	Span::appendVector(std::vector<unsigned int> &vec)
+{
+	if (_numVec.size() + vec.size() > _size)
+		Span::ValuesPoolAreFool();
+	_numVec.insert(_numVec.end(), vec.begin(), vec.end());
+}
+
+const char *Span::ValuesPoolAreFool::what() const throw()
+{
+	return ("Values pool are full.");
+}
+
+const char *Span::InvalidSizeForThatFuction::what() const throw()
+{
+	return ("Invalid array size for that function");
+}
+
+const char *Span::AppendedVectorTooBig::what() const throw()
+{
+	return ("Appended vector too BIG");
 }

@@ -1,15 +1,28 @@
 #ifndef EASYFIND_HPP
 # define EASYFIND_HPP
-#include <iostream>
-#include <vector>
+# include <iostream>
+# include <exception>
+# include <algorithm>
+
+class ElementWasNotFound : std::exception
+{
+	public:
+		virtual const char *what() const throw()
+		{
+			return ("Element was not found.");
+		}
+
+};
 
 template <class T>
-typename T::const_iterator	easyfind(T const &a, const int& b)
+typename T::iteartor	easyfind(T &a, int b)
 {
-	typename T::const_iterator beg = a.begin();
-	typename T::const_iterator ender = a.end();
-	return std::find(beg, ender, b);
-	
+	typename T::iterator startIter = a.begin();
+	typename T::iterator stopIter = a.end();
+	typename T::iterator res;
+	if ((res = std::find(startIter, stopIter, b)) == a.end())
+		throw ElementWasNotFound();
+	return res;
 }
 
 #endif

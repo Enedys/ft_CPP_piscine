@@ -3,19 +3,19 @@
 
 int main()
 {
-	std::vector<int> a;
+	std::vector<int> a(10);
 	a.push_back(1);
 	a.push_back(4);
 	a.push_back(56);
 	a.push_back(48);
 	a.push_back(6);
 	a.push_back(12);
-	std::vector<int>::const_iterator ef = easyfind(a, 4);
+	std::vector<int>::iterator var = easyfind(a, 4);
 
-	if (ef == a.end())
+	if (var == a.end())
 		std::cout << "Element was not detected\n";
 	else
-		std::cout << "Detected element is " << *ef << std::endl;
+		std::cout << "Detected element is " << *var << std::endl;
 
 	return (0);	
 }
